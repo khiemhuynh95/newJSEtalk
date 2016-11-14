@@ -25,7 +25,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import info.androidhive.navigationdrawer.R;
 import info.androidhive.navigationdrawer.fragment.HomeFragment;
-import info.androidhive.navigationdrawer.fragment.MoviesFragment;
+import info.androidhive.navigationdrawer.fragment.FormsFragment;
 import info.androidhive.navigationdrawer.fragment.NotificationsFragment;
 import info.androidhive.navigationdrawer.fragment.PhotosFragment;
 import info.androidhive.navigationdrawer.fragment.SettingsFragment;
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     // tags used to attach the fragments
     private static final String TAG_HOME = "home";
     private static final String TAG_PHOTOS = "photos";
-    private static final String TAG_MOVIES = "movies";
+    private static final String TAG_FORMS = "form";
     private static final String TAG_NOTIFICATIONS = "notifications";
     private static final String TAG_SETTINGS = "settings";
     public static String CURRENT_TAG = TAG_HOME;
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
     private void loadNavHeader() {
         // name, website
         txtName.setText("Just Speak English");
-        txtWebsite.setText("facebook.com/JSE.JustSpeakEnglish");
+        txtWebsite.setText("fb.com/JSE.JustSpeakEnglish");
 
         // loading header background image
         Glide.with(this).load(urlNavHeaderBg)
@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
                 return photosFragment;
             case 2:
                 // movies fragment
-                MoviesFragment moviesFragment = new MoviesFragment();
+                FormsFragment moviesFragment = new FormsFragment();
                 return moviesFragment;
             case 3:
                 // notifications fragment
@@ -245,9 +245,9 @@ public class MainActivity extends AppCompatActivity {
                         navItemIndex = 1;
                         CURRENT_TAG = TAG_PHOTOS;
                         break;
-                    case R.id.nav_movies:
+                    case R.id.nav_forms:
                         navItemIndex = 2;
-                        CURRENT_TAG = TAG_MOVIES;
+                        CURRENT_TAG = TAG_FORMS;
                         break;
                     case R.id.nav_notifications:
                         navItemIndex = 3;

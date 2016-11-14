@@ -11,9 +11,9 @@
             android:icon="@drawable/ic_photo_library_black_24dp"
             android:title="@string/nav_photos" />
         <item
-            android:id="@+id/nav_movies"
-            android:icon="@drawable/ic_local_movies_black_24dp"
-            android:title="@string/nav_movies" />
+            android:id="@+id/nav_forms"
+            android:icon="@drawable/ic_feedback_black_24dp"
+            android:title="@string/nav_forms" />
 
         <item
             android:id="@+id/nav_notifications"
