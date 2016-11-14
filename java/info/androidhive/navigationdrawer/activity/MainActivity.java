@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     // urls to load navigation header background image
     // and profile image
-    private static final String urlNavHeaderBg = "http://api.androidhive.info/images/nav-menu-header-bg.jpg";
+    private static final String urlNavHeaderBg = "http://k46.kn3.net/taringa/C/5/0/6/C/B/sameerchaudhry/D9F.jpg";
     private static final String urlProfileImg = "http://graph.facebook.com/JSE.JustSpeakEnglish/picture?type=large";
 
     // index to identify current nav menu item
