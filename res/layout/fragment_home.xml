@@ -5,10 +5,9 @@
     tools:context="info.androidhive.navigationdrawer.fragment.HomeFragment">
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:alpha="0.3"
-        android:src="@drawable/ic_home_black_24dp" />
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/welcome_screen"
+        android:id="@+id/home_screen" />
 
 </FrameLayout>

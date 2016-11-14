@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     // urls to load navigation header background image
     // and profile image
     private static final String urlNavHeaderBg = "http://api.androidhive.info/images/nav-menu-header-bg.jpg";
-    private static final String urlProfileImg = "https://lh3.googleusercontent.com/eCtE_G34M9ygdkmOpYvCag1vBARCmZwnVS6rS5t4JLzJ6QgQSBquM0nuTsCpLhYbKljoyS-txg";
+    private static final String urlProfileImg = "http://graph.facebook.com/JSE.JustSpeakEnglish/picture?type=large";
 
     // index to identify current nav menu item
     public static int navItemIndex = 0;
@@ -116,8 +116,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private void loadNavHeader() {
         // name, website
-        txtName.setText("Ravi Tamada");
-        txtWebsite.setText("www.androidhive.info");
+        txtName.setText("Just Speak English");
+        txtWebsite.setText("facebook.com/JSE.JustSpeakEnglish");
 
         // loading header background image
         Glide.with(this).load(urlNavHeaderBg)

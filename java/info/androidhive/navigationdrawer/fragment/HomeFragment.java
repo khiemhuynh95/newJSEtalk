@@ -4,9 +4,11 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import info.androidhive.navigationdrawer.R;
 
@@ -61,11 +63,16 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    ImageView imageView;
+    View v;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        v = inflater.inflate(R.layout.fragment_home, container, false);
+        imageView = (ImageView) v.findViewById(R.id.home_screen);
+
+        return  v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -90,6 +97,18 @@ public class HomeFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        Log.d("Home onDetach()","haha");
+        //imageView.setBackgroundResource(R.drawable.welcome_screen);
+    }
+
+
+    @Override
+    public void onResume() {
+
+        Log.d("Home onResume()","haha");
+
+
+        super.onResume();
     }
 
     /**
