@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,23 +92,7 @@ public class HomeFragment extends Fragment {
 //        }
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-        Log.d("Home onDetach()","haha");
-        //imageView.setBackgroundResource(R.drawable.welcome_screen);
-    }
 
-
-    @Override
-    public void onResume() {
-
-        Log.d("Home onResume()","haha");
-
-
-        super.onResume();
-    }
 
     /**
      * This interface must be implemented by activities that contain this

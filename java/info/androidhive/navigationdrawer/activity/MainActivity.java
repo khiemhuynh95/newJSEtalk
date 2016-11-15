@@ -22,10 +22,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.facebook.FacebookSdk;
 
 import info.androidhive.navigationdrawer.R;
-import info.androidhive.navigationdrawer.fragment.HomeFragment;
 import info.androidhive.navigationdrawer.fragment.FormsFragment;
+import info.androidhive.navigationdrawer.fragment.HomeFragment;
 import info.androidhive.navigationdrawer.fragment.NotificationsFragment;
 import info.androidhive.navigationdrawer.fragment.PhotosFragment;
 import info.androidhive.navigationdrawer.fragment.SettingsFragment;
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        FacebookSdk.sdkInitialize(getApplicationContext());
         mHandler = new Handler();
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -382,4 +384,6 @@ public class MainActivity extends AppCompatActivity {
         else
             fab.hide();
     }
+
+
 }
