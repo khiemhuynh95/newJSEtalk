@@ -1,4 +1,4 @@
-package info.androidhive.navigationdrawer.fragment;
+package info.androidhive.jsetalk2016.fragment;
 
 import android.content.Context;
 import android.net.Uri;
@@ -7,18 +7,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
-import info.androidhive.navigationdrawer.R;
+import info.androidhive.jsetalk2016.R;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link NotificationsFragment.OnFragmentInteractionListener} interface
+ * {@link HomeFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link NotificationsFragment#newInstance} factory method to
+ * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NotificationsFragment extends Fragment {
+public class HomeFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +31,7 @@ public class NotificationsFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public NotificationsFragment() {
+    public HomeFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +41,11 @@ public class NotificationsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment NotificationsFragment.
+     * @return A new instance of fragment HomeFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static NotificationsFragment newInstance(String param1, String param2) {
-        NotificationsFragment fragment = new NotificationsFragment();
+    public static HomeFragment newInstance(String param1, String param2) {
+        HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,11 +62,14 @@ public class NotificationsFragment extends Fragment {
         }
     }
 
+    ImageView imageHomeView;
+    View v;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notifications, container, false);
+        v = inflater.inflate(R.layout.fragment_home, container, false);
+        return  v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -86,11 +90,7 @@ public class NotificationsFragment extends Fragment {
 //        }
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
+
 
     /**
      * This interface must be implemented by activities that contain this

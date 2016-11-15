@@ -1,4 +1,4 @@
-package info.androidhive.navigationdrawer.other;
+package info.androidhive.jsetalk2016.other;
 
 /**
  * Created by Administrator on 11/4/2016.

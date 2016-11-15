@@ -1,4 +1,4 @@
-package info.androidhive.navigationdrawer.other;
+package info.androidhive.jsetalk2016.other;
 
 import android.content.Context;
 import android.graphics.Bitmap;

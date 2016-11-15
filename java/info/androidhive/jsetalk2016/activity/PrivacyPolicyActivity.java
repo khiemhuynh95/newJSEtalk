@@ -1,10 +1,10 @@
-package info.androidhive.navigationdrawer.activity;
+package info.androidhive.jsetalk2016.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import info.androidhive.navigationdrawer.R;
+import info.androidhive.jsetalk2016.R;
 
 public class PrivacyPolicyActivity extends AppCompatActivity {
 

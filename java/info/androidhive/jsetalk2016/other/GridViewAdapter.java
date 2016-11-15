@@ -1,4 +1,4 @@
-package info.androidhive.navigationdrawer.other;
+package info.androidhive.jsetalk2016.other;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
-import info.androidhive.navigationdrawer.R;
+import info.androidhive.jsetalk2016.R;
 
 /**
  * Created by Administrator on 11/15/2016.

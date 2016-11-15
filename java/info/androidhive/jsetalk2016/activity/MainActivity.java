@@ -1,4 +1,4 @@
-package info.androidhive.navigationdrawer.activity;
+package info.androidhive.jsetalk2016.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,13 +24,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.facebook.FacebookSdk;
 
-import info.androidhive.navigationdrawer.R;
-import info.androidhive.navigationdrawer.fragment.FormsFragment;
-import info.androidhive.navigationdrawer.fragment.HomeFragment;
-import info.androidhive.navigationdrawer.fragment.NotificationsFragment;
-import info.androidhive.navigationdrawer.fragment.PhotosFragment;
-import info.androidhive.navigationdrawer.fragment.SettingsFragment;
-import info.androidhive.navigationdrawer.other.CircleTransform;
+import info.androidhive.jsetalk2016.R;
+import info.androidhive.jsetalk2016.fragment.FormsFragment;
+import info.androidhive.jsetalk2016.fragment.HomeFragment;
+import info.androidhive.jsetalk2016.fragment.NotificationsFragment;
+import info.androidhive.jsetalk2016.fragment.PhotosFragment;
+import info.androidhive.jsetalk2016.fragment.SettingsFragment;
+import info.androidhive.jsetalk2016.other.CircleTransform;
 
 public class MainActivity extends AppCompatActivity {
 

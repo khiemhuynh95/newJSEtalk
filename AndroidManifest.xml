@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="info.androidhive.navigationdrawer">
+    package="info.androidhive.jsetalk2016">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.SplashActivity"
+            android:name="info.androidhive.jsetalk2016.activity.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/SplashTheme"
             android:screenOrientation="portrait">
@@ -22,17 +22,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.MainActivity"
+        <activity android:name="info.androidhive.jsetalk2016.activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
-            >
+            android:screenOrientation="portrait">
 
         </activity>
         <activity
-            android:name=".activity.AboutUsActivity"
+            android:name="info.androidhive.jsetalk2016.activity.AboutUsActivity"
             android:label="@string/activity_title_about_us" />
         <activity
-            android:name=".activity.PrivacyPolicyActivity"
+            android:name="info.androidhive.jsetalk2016.activity.PrivacyPolicyActivity"
             android:label="@string/activity_title_privacy_policy" />
     </application>
 

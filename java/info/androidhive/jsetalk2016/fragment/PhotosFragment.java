@@ -1,4 +1,4 @@
-package info.androidhive.navigationdrawer.fragment;
+package info.androidhive.jsetalk2016.fragment;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -22,9 +22,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import info.androidhive.navigationdrawer.R;
-import info.androidhive.navigationdrawer.other.GridViewAdapter;
-import info.androidhive.navigationdrawer.other.ImageItem;
+import info.androidhive.jsetalk2016.R;
+import info.androidhive.jsetalk2016.other.GridViewAdapter;
+import info.androidhive.jsetalk2016.other.ImageItem;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
