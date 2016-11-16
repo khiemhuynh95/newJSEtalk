@@ -24,26 +24,33 @@ import info.androidhive.jsetalk2016.activity.SplashActivity;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = "MyFirebaseMsgService";
-
+    int notification_id = 0;
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
         Log.d(TAG, "From: " + remoteMessage.getFrom());
-
+        String title = "";
+        String noti_icon = "";
+        String content_link = "";
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+            title = remoteMessage.getData().get("title");
+            noti_icon = remoteMessage.getData().get("noti_icon");
+            if (noti_icon.equals("yes"))
+                content_link = remoteMessage.getData().get("content_link");
         }
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             String messageBody = remoteMessage.getNotification().getBody();
             Log.d(TAG, "Message Notification Body: " + messageBody);
-            sendNotification(messageBody);
+            sendNotification(messageBody,title,noti_icon,content_link);
         }
     }
 
-    private void sendNotification(String message) {
+    private void sendNotification(String message,String title,String noti_icon,String content_link) {
+
         Intent intent = new Intent(this, SplashActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         //intent.putExtra("message", message);
@@ -52,20 +59,25 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.jse);
 
+        //choose small icon
+        int icon_id = R.drawable.ic_chat_white_24dp;
+        if (noti_icon.equals("yes"))
+            icon_id = R.drawable.ic_notifications_active_white_24dp;
+
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setLargeIcon(image)/*Notification icon image*/
-                //.setSmallIcon(R.drawable.jse)
-                .setContentTitle("JSE Talk invitation")
+                .setSmallIcon(icon_id)
+                .setContentTitle(title)
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
+                .setLargeIcon(image)/*Notification icon image*/
                 .setContentIntent(pendingIntent);
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(notification_id /* ID of notification */, notificationBuilder.build());
 
     }
 

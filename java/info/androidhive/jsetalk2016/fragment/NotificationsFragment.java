@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import info.androidhive.jsetalk2016.R;
+import me.leolin.shortcutbadger.ShortcutBadger;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,6 +65,10 @@ public class NotificationsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        //show noti count
+        int badgeCount = 2;
+        ShortcutBadger.applyCount(getActivity().getApplicationContext(), badgeCount); //for 1.1.4+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_notifications, container, false);
     }

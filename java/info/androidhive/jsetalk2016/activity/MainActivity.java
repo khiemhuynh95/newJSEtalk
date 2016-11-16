@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import info.androidhive.jsetalk2016.R;
 import info.androidhive.jsetalk2016.fragment.FormsFragment;
@@ -30,7 +31,6 @@ import info.androidhive.jsetalk2016.fragment.NotificationsFragment;
 import info.androidhive.jsetalk2016.fragment.PhotosFragment;
 import info.androidhive.jsetalk2016.fragment.SettingsFragment;
 import info.androidhive.jsetalk2016.other.CircleTransform;
-import me.leolin.shortcutbadger.ShortcutBadger;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -73,11 +73,9 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mHandler = new Handler();
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
 
-        //show noti count
-        int badgeCount = 2;
-        ShortcutBadger.applyCount(getApplicationContext(), badgeCount); //for 1.1.4+
+        mHandler = new Handler();
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
