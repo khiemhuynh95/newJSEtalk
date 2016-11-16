@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,16 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import info.androidhive.jsetalk2016.R;
 import info.androidhive.jsetalk2016.other.AppWebViewClients;
+
+import static info.androidhive.jsetalk2016.R.id.gg_form;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,18 +75,42 @@ public class FormsFragment extends Fragment {
         }
     }
 
+    private static final String TAG = "PostDetailActivity";
+    private DatabaseReference mPostReference;
+    String value;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_forms, container, false);
 
-        gg_form_wv = (WebView) v.findViewById(R.id.gg_form);
+        gg_form_wv = (WebView) v.findViewById(gg_form);
         progressBar = (ProgressBar) v.findViewById(R.id.progressBarAtForm);
 
+        mPostReference = FirebaseDatabase.getInstance().getReference()
+                .child("link_form");
+        mPostReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                value = dataSnapshot.getValue(String.class);
+                if (!value.isEmpty()) {
+                    //give the main activity the value
+                    loadFormUrl(value);
+                }
+                Log.d(TAG, "Value is: " + value);
+            }
 
-        loadFormUrl("https://docs.google.com/forms/d/e/1FAIpQLSdGCbu5s_eF2crMdqjPBCKJ_TNSTE7JfA3wMI6EeqHPDJJYFA/viewform");
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
 
+        //loadFormUrl("https://docs.google.com/forms/d/e/1FAIpQLSdGCbu5s_eF2crMdqjPBCKJ_TNSTE7JfA3wMI6EeqHPDJJYFA/viewform");
         return v;
     }
 
@@ -120,15 +153,15 @@ public class FormsFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-
-    public void loadFormUrl(String url) {
+    public void loadFormUrl(String url){
         WebSettings webSettings = gg_form_wv.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
         gg_form_wv.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
         gg_form_wv.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-        webSettings.setEnableSmoothTransition(true);
+        gg_form_wv.getSettings().setAppCacheEnabled(true);
 
+        webSettings.setEnableSmoothTransition(true);
         webSettings.setSaveFormData(true);
 
         gg_form_wv.loadUrl(url);
@@ -141,5 +174,6 @@ public class FormsFragment extends Fragment {
                 progressBar.setVisibility(View.GONE);
             }
         });
+
     }
 }

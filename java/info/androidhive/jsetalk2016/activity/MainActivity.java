@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.facebook.FacebookSdk;
 
 import info.androidhive.jsetalk2016.R;
 import info.androidhive.jsetalk2016.fragment.FormsFragment;
@@ -31,6 +30,7 @@ import info.androidhive.jsetalk2016.fragment.NotificationsFragment;
 import info.androidhive.jsetalk2016.fragment.PhotosFragment;
 import info.androidhive.jsetalk2016.fragment.SettingsFragment;
 import info.androidhive.jsetalk2016.other.CircleTransform;
+import me.leolin.shortcutbadger.ShortcutBadger;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -73,8 +73,11 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
         mHandler = new Handler();
+
+        //show noti count
+        int badgeCount = 2;
+        ShortcutBadger.applyCount(getApplicationContext(), badgeCount); //for 1.1.4+
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -137,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
 
         // showing dot next to notifications label
         navigationView.getMenu().getItem(3).setActionView(R.layout.menu_dot);
+        navigationView.getMenu().getItem(2).setActionView(R.layout.menu_dot);
+        navigationView.getMenu().getItem(1).setActionView(R.layout.menu_dot);
     }
 
     /***

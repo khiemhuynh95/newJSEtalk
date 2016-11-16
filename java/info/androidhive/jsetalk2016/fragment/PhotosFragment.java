@@ -15,6 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,7 +37,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -102,12 +107,12 @@ public class PhotosFragment extends Fragment {
         progressBar = (ProgressBar) v.findViewById(R.id.progressBarAtPhoto);
         images = new ArrayList<>();
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
-        recyclerView.addOnItemTouchListener(new GalleryAdapter.RecyclerTouchListener(getApplicationContext(), recyclerView, new GalleryAdapter.ClickListener() {
+        recyclerView.addOnItemTouchListener(new GalleryAdapter.RecyclerTouchListener(getContext(), recyclerView, new GalleryAdapter.ClickListener() {
             @Override
             public void onClick(View view, int position) {
                 Bundle bundle = new Bundle();
@@ -131,12 +136,40 @@ public class PhotosFragment extends Fragment {
         return v;
     }
 
-    private void fetchImage() {
-        String album_id = "669739276539513";
-        //can get the permanent token
-        String access_token = "EAAIOULJXEmwBAM8cK6i71lO923hl7gpqZBTIoJzz6Nnfu38vLMTndPmc1R4xXgW95U2eFyfhzjJXppgB6BgZCYZAt8ZCSgzlhMU68IVxBdNxUzX6ZBPYkz13aDBiv7Y7HZBwtrZBuJ1uAq1sHE0nCM1diXM8hEzZCus1ZCs8v8Qb8ewZDZD";
+    private static final String TAG_post = "PostDetailActivity";
+    private DatabaseReference mPostReference;
+    long value;
+    long album_id;
 
-        new RequestTask().execute("https://graph.facebook.com/v2.8/" + album_id + "/photos?fields=source,created_time&access_token=" + access_token);
+
+    private void fetchImage() {
+
+        mPostReference = FirebaseDatabase.getInstance().getReference()
+                .child("album_id");
+        mPostReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                value = dataSnapshot.getValue(long.class);
+                if (value != 0) {
+                    //give the main activity the value
+                    album_id = value;
+                    //permanent token
+                    String access_token = "EAAIOULJXEmwBAM8cK6i71lO923hl7gpqZBTIoJzz6Nnfu38vLMTndPmc1R4xXgW95U2eFyfhzjJXppgB6BgZCYZAt8ZCSgzlhMU68IVxBdNxUzX6ZBPYkz13aDBiv7Y7HZBwtrZBuJ1uAq1sHE0nCM1diXM8hEzZCus1ZCs8v8Qb8ewZDZD";
+                    new RequestTask().execute("https://graph.facebook.com/v2.8/" + album_id + "/photos?fields=source,created_time&access_token=" + access_token);
+                }
+                Log.d(TAG_post, "Value is: " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG_post, "Failed to read value.", error.toException());
+            }
+        });
+
+
 
     }
 
@@ -163,7 +196,6 @@ public class PhotosFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
 
 
     /**
@@ -227,9 +259,7 @@ public class PhotosFragment extends Fragment {
             super.onPostExecute(result);
             //Do anything with response..
             Log.d("ANSWER", String.valueOf(images.size()));
-
-//            gridAdapter = new GridViewAdapter(getContext(), imageItems);
-            mAdapter = new GalleryAdapter(getApplicationContext(), images);
+            mAdapter = new GalleryAdapter(getContext(), images);
             recyclerView.setAdapter(mAdapter);
             progressBar.setVisibility(View.GONE);
         }
