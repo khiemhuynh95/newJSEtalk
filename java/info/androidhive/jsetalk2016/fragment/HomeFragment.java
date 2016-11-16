@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
 import info.androidhive.jsetalk2016.R;
 
 /**
@@ -69,6 +71,9 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_home, container, false);
+
+        imageHomeView = (ImageView) v.findViewById(R.id.home_screen);
+        Picasso.with(getContext()).load(R.drawable.welcome_screen).fit().into(imageHomeView);
         return  v;
     }
 

@@ -1,17 +1,18 @@
 package info.androidhive.jsetalk2016.fragment;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.ProgressBar;
 
 import org.json.JSONArray;
@@ -19,15 +20,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import info.androidhive.jsetalk2016.R;
-import info.androidhive.jsetalk2016.other.GridViewAdapter;
-import info.androidhive.jsetalk2016.other.ImageItem;
+import info.androidhive.jsetalk2016.activity.MainActivity;
+import info.androidhive.jsetalk2016.glide.GalleryAdapter;
+import info.androidhive.jsetalk2016.glide.Image;
+import info.androidhive.jsetalk2016.glide.SlideshowDialogFragment;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -80,27 +84,60 @@ public class PhotosFragment extends Fragment {
         }
     }
 
-    private GridView gridView;
-    private GridViewAdapter gridAdapter;
     View v;
     ProgressBar progressBar;
+    private String TAG = MainActivity.class.getSimpleName();
+    private GalleryAdapter mAdapter;
+    private RecyclerView recyclerView;
+    ArrayList<Image> images;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        v =  inflater.inflate(R.layout.fragment_photos, container, false);
+        v = inflater.inflate(R.layout.fragment_photos, container, false);
 
-        //change dynamically
+        recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
+        progressBar = (ProgressBar) v.findViewById(R.id.progressBarAtPhoto);
+        images = new ArrayList<>();
+
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+
+        recyclerView.addOnItemTouchListener(new GalleryAdapter.RecyclerTouchListener(getApplicationContext(), recyclerView, new GalleryAdapter.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("images", images);
+                bundle.putInt("position", position);
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                SlideshowDialogFragment newFragment = SlideshowDialogFragment.newInstance();
+                newFragment.setArguments(bundle);
+                newFragment.show(ft, "slideshow");
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+
+        fetchImage();
+
+        return v;
+    }
+
+    private void fetchImage() {
         String album_id = "669739276539513";
         //can get the permanent token
         String access_token = "EAAIOULJXEmwBAM8cK6i71lO923hl7gpqZBTIoJzz6Nnfu38vLMTndPmc1R4xXgW95U2eFyfhzjJXppgB6BgZCYZAt8ZCSgzlhMU68IVxBdNxUzX6ZBPYkz13aDBiv7Y7HZBwtrZBuJ1uAq1sHE0nCM1diXM8hEzZCus1ZCs8v8Qb8ewZDZD";
-        //give items list to here
-        new RequestTask().execute("https://graph.facebook.com/v2.8/" + album_id + "/photos?fields=name,source&access_token=" + access_token);
 
-        gridView = (GridView) v.findViewById(R.id.gridview_fb_img);
-        progressBar = (ProgressBar) v.findViewById(R.id.progressBarAtPhoto);
-        return v;
+        new RequestTask().execute("https://graph.facebook.com/v2.8/" + album_id + "/photos?fields=source,created_time&access_token=" + access_token);
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -127,6 +164,8 @@ public class PhotosFragment extends Fragment {
         mListener = null;
     }
 
+
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -142,7 +181,7 @@ public class PhotosFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    ArrayList<ImageItem> imageItems = new ArrayList<>();
+
     class RequestTask extends AsyncTask<String, String, String> {
 
         @Override
@@ -164,13 +203,15 @@ public class PhotosFragment extends Fragment {
                 JSONObject jobject = new JSONObject(jsonData);
                 JSONArray jarray = jobject.getJSONArray("data");
                 for (int i = 0; i < jarray.length(); i++) {
-                    JSONObject object     = jarray.getJSONObject(i);
+                    JSONObject object = jarray.getJSONObject(i);
                     String imgUrl = object.getString("source");
                     //load img to imgview
-                    URL u = new URL(imgUrl);
-                    Bitmap bitmap = BitmapFactory.decodeStream(u.openConnection().getInputStream());
-                    imageItems.add(new ImageItem(bitmap, i));
-                    Log.d("IMGSRC", imgUrl);
+                    Image img = new Image();
+                    img.setName("image #" + i);
+                    img.setTimestamp(object.getString("created_time"));
+                    img.setUrl(imgUrl);
+                    images.add(img);
+                    Log.d("IMGSRC", img.getUrl());
                 }
                 responseString = jsonData;
             } catch (IOException e) {
@@ -185,10 +226,11 @@ public class PhotosFragment extends Fragment {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             //Do anything with response..
-            Log.d("ANSWER", String.valueOf(imageItems.size()));
+            Log.d("ANSWER", String.valueOf(images.size()));
 
-            gridAdapter = new GridViewAdapter(getContext(), imageItems);
-            gridView.setAdapter(gridAdapter);
+//            gridAdapter = new GridViewAdapter(getContext(), imageItems);
+            mAdapter = new GalleryAdapter(getApplicationContext(), images);
+            recyclerView.setAdapter(mAdapter);
             progressBar.setVisibility(View.GONE);
         }
     }
