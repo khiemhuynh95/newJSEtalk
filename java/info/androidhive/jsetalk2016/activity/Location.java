@@ -1,7 +1,8 @@
 package info.androidhive.jsetalk2016.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -17,7 +18,7 @@ import info.androidhive.jsetalk2016.R;
 
 import static info.androidhive.jsetalk2016.R.id.map;
 
-public class Location extends FragmentActivity implements OnMapReadyCallback {
+public class Location extends ActionBarActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
@@ -25,6 +26,9 @@ public class Location extends FragmentActivity implements OnMapReadyCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(map);
@@ -49,7 +53,6 @@ public class Location extends FragmentActivity implements OnMapReadyCallback {
         LatLng beeCoLocation = new LatLng(10.7811685, 106.6795281);
         mMap.addMarker(new MarkerOptions().position(beeCoLocation).title("JSE talk is HERE!"));
 
-
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(beeCoLocation)      // Sets the center of the map to Mountain View
                 .zoom(17)                   // Sets the zoom
@@ -66,4 +69,22 @@ public class Location extends FragmentActivity implements OnMapReadyCallback {
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == android.R.id.home) {
+            // finish the activity
+            onBackPressed();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }
