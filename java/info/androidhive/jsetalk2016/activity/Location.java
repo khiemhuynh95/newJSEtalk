@@ -50,14 +50,14 @@ public class Location extends ActionBarActivity implements OnMapReadyCallback {
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng beeCoLocation = new LatLng(10.7811685, 106.6795281);
+        LatLng beeCoLocation = new LatLng(10.781167, 106.680076);
         mMap.addMarker(new MarkerOptions().position(beeCoLocation).title("JSE talk is HERE!"));
 
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(beeCoLocation)      // Sets the center of the map to Mountain View
-                .zoom(17)                   // Sets the zoom
-                .bearing(180)                // Sets the orientation of the camera to east
-                .tilt(30)                   // Sets the tilt of the camera to 30 degrees
+                .zoom(20)                   // Sets the zoom
+                .bearing(270)                // Sets the orientation of the camera to east
+                .tilt(35)                   // Sets the tilt of the camera to 30 degrees
                 .build();
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
