@@ -57,7 +57,7 @@
             android:value="AIzaSyCljPc_1OKi7W-l7g8f_hNdRcfxgljl7K4" />
 
         <activity
-            android:name=".activity.Location"
+            android:name=".activity.LocationActivity"
             android:label="@string/activity_title_location" />
 
     </application>

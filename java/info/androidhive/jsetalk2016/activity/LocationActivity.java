@@ -18,7 +18,7 @@ import info.androidhive.jsetalk2016.R;
 
 import static info.androidhive.jsetalk2016.R.id.map;
 
-public class Location extends ActionBarActivity implements OnMapReadyCallback {
+public class LocationActivity extends ActionBarActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
@@ -55,9 +55,9 @@ public class Location extends ActionBarActivity implements OnMapReadyCallback {
 
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(beeCoLocation)      // Sets the center of the map to Mountain View
-                .zoom(20)                   // Sets the zoom
+                .zoom(18)                   // Sets the zoom
                 .bearing(270)                // Sets the orientation of the camera to east
-                .tilt(35)                   // Sets the tilt of the camera to 30 degrees
+                .tilt(32)                   // Sets the tilt of the camera to 30 degrees
                 .build();
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
