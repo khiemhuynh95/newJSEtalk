@@ -34,7 +34,6 @@ public class SlideshowDialogFragment extends DialogFragment {
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -105,12 +104,12 @@ public class SlideshowDialogFragment extends DialogFragment {
     }
 
     @Override
-    public void onStop()
-    {
+    public void onStop() {
         super.onStop();
         // unlock screen;
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
+
     //	adapter
     public class MyViewPagerAdapter extends PagerAdapter {
 
@@ -126,7 +125,8 @@ public class SlideshowDialogFragment extends DialogFragment {
             View view = layoutInflater.inflate(R.layout.image_fullscreen_preview, container, false);
 
             ImageView imageViewPreview = (ImageView) view.findViewById(R.id.image_preview);
-
+            //final TouchImageView imageViewPreview = (TouchImageView) view.findViewById(R.id.image_preview);
+            //set matrix to zoom
             Image image = images.get(position);
 
             Glide.with(getActivity()).load(image.getUrl())
