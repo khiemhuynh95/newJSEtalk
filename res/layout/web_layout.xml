@@ -1,16 +1,15 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="info.androidhive.jsetalk2016.activity.AboutUsActivity">
+    android:layout_height="match_parent">
 
     <WebView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/about_us_html_view" />
+        android:id="@+id/webview" />
 
     <ProgressBar
-        android:id="@+id/progressBarAtAboutUs"
+        android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -19,4 +18,5 @@
         android:layout_marginTop="150dp"
         android:foregroundGravity="center"
         android:indeterminateOnly="true" />
+
 </FrameLayout>

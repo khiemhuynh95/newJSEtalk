@@ -15,9 +15,10 @@ public class NewsfeedViewHolder extends RecyclerView.ViewHolder {
     TextView titleTxt;
     ImageView img;
 
-    public NewsfeedViewHolder(View itemView) {
+    public NewsfeedViewHolder(final View itemView) {
         super(itemView);
-        titleTxt= (TextView) itemView.findViewById(R.id.textView_title);
-        img= (ImageView) itemView.findViewById(R.id.img_view_at_reclycler);
+        titleTxt = (TextView) itemView.findViewById(R.id.textView_title);
+        img = (ImageView) itemView.findViewById(R.id.img_view_at_reclycler);
     }
+
 }

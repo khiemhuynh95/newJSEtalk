@@ -1,6 +1,7 @@
 package info.androidhive.jsetalk2016.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,7 +27,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import info.androidhive.jsetalk2016.R;
-import info.androidhive.jsetalk2016.rss.CustomAdapter;
+import info.androidhive.jsetalk2016.activity.RssWebReadActivity;
 import info.androidhive.jsetalk2016.rss.FeedItem;
 import info.androidhive.jsetalk2016.rss.MyAdapter;
 import info.androidhive.jsetalk2016.rss.XMLDOMParser;
@@ -83,8 +84,6 @@ public class NewsfeedFragment extends Fragment {
     }
 
     ArrayList<FeedItem> rssList;
-    CustomAdapter cus_adapter;
-    //ListView listView;
     RecyclerView recyclerView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -102,6 +101,20 @@ public class NewsfeedFragment extends Fragment {
                 new ReadData().execute("http://www.lifehack.org/feed");
             }
         });
+
+        recyclerView.addOnItemTouchListener(new MyAdapter.RecyclerTouchListener(getContext(), recyclerView, new MyAdapter.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Intent intent = new Intent(getContext(), RssWebReadActivity.class);
+                intent.putExtra("link", rssList.get(position).getLink());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
         return v;
     }
 
@@ -140,8 +153,7 @@ public class NewsfeedFragment extends Fragment {
 
                 rssList.add(new FeedItem(title, link, img_url));
             }
-            cus_adapter = new CustomAdapter(getContext(), android.R.layout.simple_list_item_1, rssList);
-            //listView.setAdapter(cus_adapter);
+
             recyclerView.setAdapter(new MyAdapter(getContext(),rssList));
             super.onPostExecute(s);
 

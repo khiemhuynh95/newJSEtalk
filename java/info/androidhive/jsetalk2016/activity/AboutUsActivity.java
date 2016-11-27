@@ -18,11 +18,11 @@ public class AboutUsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about_us);
+        setContentView(R.layout.web_layout);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        about_us_view = (WebView) findViewById(R.id.about_us_html_view);
-        progressBar = (ProgressBar) findViewById(R.id.progressBarAtAboutUs);
+        about_us_view = (WebView) findViewById(R.id.webview);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         String url = "file:///android_asset/about_us.html";
         loadFormUrl(url);
 

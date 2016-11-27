@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import info.androidhive.jsetalk2016.R;
 import info.androidhive.jsetalk2016.other.AppWebViewClients;
 
-import static info.androidhive.jsetalk2016.R.id.gg_form;
+import static info.androidhive.jsetalk2016.R.id.webview;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -83,10 +83,10 @@ public class FormsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_forms, container, false);
+        View v = inflater.inflate(R.layout.web_layout, container, false);
 
-        gg_form_wv = (WebView) v.findViewById(gg_form);
-        progressBar = (ProgressBar) v.findViewById(R.id.progressBarAtForm);
+        gg_form_wv = (WebView) v.findViewById(webview);
+        progressBar = (ProgressBar) v.findViewById(R.id.progressBar);
 
         mPostReference = FirebaseDatabase.getInstance().getReference()
                 .child("link_form");

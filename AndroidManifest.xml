@@ -60,6 +60,8 @@
             android:name=".activity.LocationActivity"
             android:label="@string/activity_title_location" />
 
+        <activity android:name=".activity.RssWebReadActivity"></activity>
+
     </application>
 
 </manifest>
