@@ -25,6 +25,13 @@ public class AboutUsActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressBarAtAboutUs);
         String url = "file:///android_asset/about_us.html";
         loadFormUrl(url);
+
+        about_us_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                about_us_view.getSettings().setBuiltInZoomControls(true);
+            }
+        });
     }
 
     public void loadFormUrl(String url){
@@ -35,7 +42,6 @@ public class AboutUsActivity extends AppCompatActivity {
         about_us_view.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         about_us_view.getSettings().setAppCacheEnabled(true);
 
-        about_us_view.getSettings().setBuiltInZoomControls(true);
         webSettings.setEnableSmoothTransition(true);
         webSettings.setSaveFormData(true);
 

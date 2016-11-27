@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG_PHOTOS = "photos";
     private static final String TAG_FORMS = "form";
     private static final String TAG_NOTIFICATIONS = "notifications";
-    private static final String TAG_SETTINGS = "settings";
+    private static final String TAG_NEWSFEED = "newsfeed";
     public static String CURRENT_TAG = TAG_HOME;
 
     // toolbar titles respected to selected nav menu item
@@ -264,7 +264,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_settings:
                         navItemIndex = 4;
-                        CURRENT_TAG = TAG_SETTINGS;
+                        CURRENT_TAG = TAG_NEWSFEED;
                         break;
                     case R.id.nav_about_us:
                         // launch new intent instead of loading fragment

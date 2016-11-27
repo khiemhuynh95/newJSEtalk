@@ -11,7 +11,7 @@
     <string name="nav_photos">Photos</string>
     <string name="nav_forms">Register</string>
     <string name="nav_notifications">Notifications</string>
-    <string name="nav_settings">Settings</string>
+    <string name="nav_newsfeed">Newsfeed</string>
     <string name="nav_about_us">About Us</string>
 
     <!-- Toolbar titles when navigation menu item is selected -->
@@ -20,7 +20,7 @@
         <item>Photos</item>
         <item>Register</item>
         <item>Notifications</item>
-        <item>Settings</item>
+        <item>Newsfeed</item>
     </string-array>
 
     <string name="activity_title_about_us">About Us</string>
