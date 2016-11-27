@@ -28,7 +28,7 @@ import info.androidhive.jsetalk2016.fragment.FormsFragment;
 import info.androidhive.jsetalk2016.fragment.HomeFragment;
 import info.androidhive.jsetalk2016.fragment.NotificationsFragment;
 import info.androidhive.jsetalk2016.fragment.PhotosFragment;
-import info.androidhive.jsetalk2016.fragment.SettingsFragment;
+import info.androidhive.jsetalk2016.fragment.NewsfeedFragment;
 import info.androidhive.jsetalk2016.other.CircleTransform;
 
 public class MainActivity extends AppCompatActivity {
@@ -220,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
 
             case 4:
                 // settings fragment
-                SettingsFragment settingsFragment = new SettingsFragment();
+                NewsfeedFragment settingsFragment = new NewsfeedFragment();
                 return settingsFragment;
             default:
                 return new HomeFragment();
