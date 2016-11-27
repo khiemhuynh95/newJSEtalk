@@ -5,11 +5,12 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import org.w3c.dom.CharacterData;
 import org.w3c.dom.Document;
@@ -27,6 +28,7 @@ import java.util.regex.Pattern;
 import info.androidhive.jsetalk2016.R;
 import info.androidhive.jsetalk2016.rss.CustomAdapter;
 import info.androidhive.jsetalk2016.rss.FeedItem;
+import info.androidhive.jsetalk2016.rss.MyAdapter;
 import info.androidhive.jsetalk2016.rss.XMLDOMParser;
 
 /**
@@ -82,13 +84,16 @@ public class NewsfeedFragment extends Fragment {
 
     ArrayList<FeedItem> rssList;
     CustomAdapter cus_adapter;
-    ListView listView;
+    //ListView listView;
+    RecyclerView recyclerView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_newsfeed, container, false);
-        listView = (ListView) v.findViewById(R.id.listView);
+        //listView = (ListView) v.findViewById(listView);
+        recyclerView = (RecyclerView) v.findViewById(R.id.rv);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         rssList = new ArrayList<FeedItem>();
 
         getActivity().runOnUiThread(new Runnable() {
@@ -136,7 +141,8 @@ public class NewsfeedFragment extends Fragment {
                 rssList.add(new FeedItem(title, link, img_url));
             }
             cus_adapter = new CustomAdapter(getContext(), android.R.layout.simple_list_item_1, rssList);
-            listView.setAdapter(cus_adapter);
+            //listView.setAdapter(cus_adapter);
+            recyclerView.setAdapter(new MyAdapter(getContext(),rssList));
             super.onPostExecute(s);
 
         }
